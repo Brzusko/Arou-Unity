@@ -9,9 +9,21 @@ public class ForceHanlder : MonoBehaviour
 
     [SerializeField]
     private Camera _mainCamera;
+
+    private Vector3 GetMouseGlobalPos()
+    {
+        var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        return new Vector3(mousePos.x, mousePos.y);
+    }
+
+    protected virtual void OnFailHandler(object sender, OnFaileArgs onFailArgs)
+    {
+        transform.gameObject.SetActive(false);
+    }
     void Start()
     {
         _gameManager = GameManager.Instance;
+        _gameManager.OnFailEvent += OnFailHandler;
     }
 
     
@@ -33,11 +45,7 @@ public class ForceHanlder : MonoBehaviour
         }
     }
 
-    private Vector3 GetMouseGlobalPos()
-    {
-        var mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        return new Vector3(mousePos.x, mousePos.y);
-    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

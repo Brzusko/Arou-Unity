@@ -53,18 +53,28 @@ public class GameManager : MonoBehaviour
 
     #region Events
     public event EventHandler<OnShootArgs> OnShootEvent;
+    public event EventHandler<OnFaileArgs> OnFailEvent;
     #endregion
 
     protected virtual void OnShootEventHandler(OnShootArgs onShootArgs)
     {
         OnShootEvent?.Invoke(this, onShootArgs);
-        Debug.Log(onShootArgs.Force);
+    }
+
+    protected virtual void OnFailEventHandler(OnFaileArgs onFaileArgs)
+    {
+        OnFailEvent?.Invoke(this, onFaileArgs);
     }
 
     public void Notify(OnShootArgs onShootArgs)
     {
 
         OnShootEventHandler(onShootArgs);
+    }
+
+    public void Notify(OnFaileArgs onFailArgs)
+    {
+        OnFailEventHandler(onFailArgs);
     }
 
     private void Awake()
