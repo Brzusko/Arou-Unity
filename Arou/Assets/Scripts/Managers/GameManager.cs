@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     {
         get { return _forceMultipler; }
     }
+
+    public PipeSpawner PipeSpawner { get => _pipeSpawner; }
     #endregion
 
     #region Private settings and vars
@@ -49,6 +51,10 @@ public class GameManager : MonoBehaviour
     private float _maxForce = 0.0f;
     [SerializeField]
     private bool _isDebugModeOn = true;
+
+    [Header("Systems")]
+    [SerializeField]
+    private PipeSpawner _pipeSpawner;
     #endregion
 
     #region Events

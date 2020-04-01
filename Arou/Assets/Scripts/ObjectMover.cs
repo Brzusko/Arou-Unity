@@ -5,10 +5,11 @@ using UnityEngine;
 public class ObjectMover : MonoBehaviour
 {
     [SerializeField]
-    private Transform _objectToMove;
+    private Transform[] _objectsToMove;
 
     void Update()
     {
-        _objectToMove.position = new Vector3(transform.position.x, transform.position.y);
+        foreach(var obj in _objectsToMove)
+            obj.position = new Vector3(transform.position.x, transform.position.y);
     }
 }

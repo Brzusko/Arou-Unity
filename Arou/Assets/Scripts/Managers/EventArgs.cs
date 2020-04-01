@@ -17,4 +17,14 @@ namespace EventArguments
     {
         public int Score { get; set; }
     }
+
+    public class OnDespawnArgs: EventArgs
+    {
+        public Pipe Pipe { get; set; }
+    }
+
+    public class OnSpawnArgs: EventArgs
+    {
+        public Pipe Pipe { get; set; }
+    }
 }

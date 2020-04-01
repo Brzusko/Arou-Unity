@@ -37,6 +37,10 @@ public class Pipe : MonoBehaviour
         _scoreAreaCollider.size = new Vector2(RelativePivotPos.magnitude, _scoreAreaCollider.size.y);
     }
 
+    public void SetNewLocation(Vector3 location)
+    {
+        transform.position = location;
+    }
     void Start()
     {
         SetCenterOfArea();
