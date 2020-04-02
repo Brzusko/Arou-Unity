@@ -35,6 +35,43 @@ public class GameManager : MonoBehaviour
         get { return _forceMultipler; }
     }
 
+    public int Score
+    {
+        get { return _playerScore; }
+    }
+
+    public int PipeSpawnCount
+    {
+        get
+        {
+            if(Score == 0)
+                return 3;
+
+            var toReturn = 3 + Mathf.FloorToInt(Score * 0.05f);
+            return toReturn;
+        }
+    }
+
+    public float MinPadWith
+    {
+        get => _minWidthBetweenPads;
+    }
+
+    public float MaxPadWith
+    {
+        get => _maxWidthBetweenPads;
+    }
+
+    public float MinPadHeight
+    {
+        get => _minHeightBetweenPads;
+    }
+
+    public float MaxPadHeight
+    {
+        get => _maxHeightBetweenPads;
+    }
+
     public PipeSpawner PipeSpawner { get => _pipeSpawner; }
     #endregion
 
@@ -44,14 +81,24 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int _playerScore = 0;
     [SerializeField]
-    private float _maxDistanceBetweenPads = 0.0f;
+    private float _maxWidthBetweenPads = 0.0f;
+    [SerializeField]
+    private float _minWidthBetweenPads = 0.0f;
+    [SerializeField]
+    private float _maxHeightBetweenPads = 0.0f;
+    [SerializeField]
+    private float _minHeightBetweenPads = 0.0f;
     [SerializeField]
     private float _forceMultipler = 0.0f;
     [SerializeField]
     private float _maxForce = 0.0f;
     [SerializeField]
     private bool _isDebugModeOn = true;
-
+    [SerializeField]
+    private float _widthLimit = 0.0f;
+    [SerializeField]
+    private float _heightLimit = 0.0f;
+    
     [Header("Systems")]
     [SerializeField]
     private PipeSpawner _pipeSpawner;
@@ -60,6 +107,7 @@ public class GameManager : MonoBehaviour
     #region Events
     public event EventHandler<OnShootArgs> OnShootEvent;
     public event EventHandler<OnFaileArgs> OnFailEvent;
+    public event EventHandler<OnScoreArgs> OnScoreEvent;
     #endregion
 
     protected virtual void OnShootEventHandler(OnShootArgs onShootArgs)
@@ -72,6 +120,44 @@ public class GameManager : MonoBehaviour
         OnFailEvent?.Invoke(this, onFaileArgs);
     }
 
+    protected virtual void OnScoreEventHandler(OnScoreArgs onScoreArgs)
+    {
+        _playerScore++;
+        RecalculateSettings();
+        var score = new OnScoreArgs { Score = _playerScore };
+        OnScoreEvent?.Invoke(this, score);
+    }
+
+    private void CaluclateMinWidth()
+    {
+        var newValue = (_playerScore * 0.03f - 3f) * (-1f);
+        newValue = Mathf.Clamp(newValue, _widthLimit, 5.0f);
+        _minWidthBetweenPads = newValue;
+    }
+
+    private void CalculateMaxWidth()
+    {
+        _maxWidthBetweenPads = _minWidthBetweenPads + 0.8f;
+    }
+
+    private void CalculateMinHeight()
+    {
+        var newValue = (_playerScore * 0.05f - 3f) * (-1f);
+        newValue = Mathf.Clamp(newValue, _heightLimit, 5.0f);
+        _minHeightBetweenPads = newValue;
+    }
+
+    private void CalculateMaxHeight()
+    {
+        _maxHeightBetweenPads = _minHeightBetweenPads + 0.2f;
+    }
+    private void RecalculateSettings()
+    {
+        CaluclateMinWidth();
+        CalculateMaxWidth();
+        CalculateMinHeight();
+        CalculateMaxHeight();
+    }
     public void Notify(OnShootArgs onShootArgs)
     {
 
@@ -83,6 +169,11 @@ public class GameManager : MonoBehaviour
         OnFailEventHandler(onFailArgs);
     }
 
+    public void Notify(OnScoreArgs onScoreArgs)
+    {
+        OnScoreEventHandler(onScoreArgs);
+    }
+
     private void Awake()
     {
         if (_instance != null)
@@ -90,11 +181,7 @@ public class GameManager : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(this);
-    }
-
-    private void Start()
-    {
-        
+        RecalculateSettings();
     }
 
 }

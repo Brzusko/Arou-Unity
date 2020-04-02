@@ -10,7 +10,7 @@ namespace EventArguments
 
     public class OnScoreArgs : EventArgs
     {
-
+        public int Score { get; set; }
     }
 
     public class OnFaileArgs : EventArgs

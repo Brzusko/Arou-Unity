@@ -33,8 +33,17 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Wall")
+        if (collision.tag == "Wall" || collision.tag == "Pipe")
             _gameManager.Notify(new OnFaileArgs { });
+        else if (collision.tag == "ScoreArea")
+        {
+            var pipe = collision.transform.parent.GetComponent<Pipe>();
+            if (pipe.IsScorable)
+            {
+                pipe.Score();
+                _gameManager.Notify(new OnScoreArgs { });
+            }
+        }
     }
 
 }
