@@ -58,8 +58,8 @@ public class Pipe : MonoBehaviour
     {
         var randScale = Random.Range(_manager.MinPadWith, _manager.MaxPadWith);
         var randLerp = Random.Range(0.01f, 1.0f);
-        var firstPipeScale = randScale * randLerp;
-        var secondPipeScale = randScale * (1.0f - randLerp);
+        var firstPipeScale = 5 - (randScale * randLerp);
+        var secondPipeScale = 5 - (randScale * (1.0f - randLerp));
      
         _leftPipeTransform.localScale = new Vector3(firstPipeScale, 1);
         _rightPipeTransform.localScale = new Vector3(secondPipeScale, 1);

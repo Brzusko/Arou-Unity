@@ -634,7 +634,7 @@ PrefabInstance:
     - target: {fileID: 5362131718944985687, guid: b90ab6dc9b295084e9ebc31882d2bb66,
         type: 3}
       propertyPath: _widthLimit
-      value: 0.3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5362131718944985687, guid: b90ab6dc9b295084e9ebc31882d2bb66,
         type: 3}
@@ -902,6 +902,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walls
       objectReference: {fileID: 0}
+    - target: {fileID: 3492519408426684249, guid: 2433ea9fb44b3a140b3061630ccce55c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.55
+      objectReference: {fileID: 0}
     - target: {fileID: 3670324944830847584, guid: 2433ea9fb44b3a140b3061630ccce55c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -956,6 +961,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922446874899213006, guid: 2433ea9fb44b3a140b3061630ccce55c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.52
       objectReference: {fileID: 0}
     - target: {fileID: 8602482918662305909, guid: 2433ea9fb44b3a140b3061630ccce55c,
         type: 3}
