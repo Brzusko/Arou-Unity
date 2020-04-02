@@ -35,6 +35,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.tag == "Wall")
             _gameManager.Notify(new OnFaileArgs { });
+        else if (collision.tag == "ScoreArea")
+            _gameManager.Notify(new OnScoreArgs { });
     }
 
 }

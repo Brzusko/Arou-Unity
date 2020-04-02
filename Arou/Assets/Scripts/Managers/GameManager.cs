@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
         get { return _forceMultipler; }
     }
 
+    public int Score
+    {
+        get { return _playerScore; }
+    }
+
     public PipeSpawner PipeSpawner { get => _pipeSpawner; }
     #endregion
 
@@ -60,6 +65,7 @@ public class GameManager : MonoBehaviour
     #region Events
     public event EventHandler<OnShootArgs> OnShootEvent;
     public event EventHandler<OnFaileArgs> OnFailEvent;
+    public event EventHandler<OnScoreArgs> OnScoreEvent;
     #endregion
 
     protected virtual void OnShootEventHandler(OnShootArgs onShootArgs)
@@ -72,6 +78,13 @@ public class GameManager : MonoBehaviour
         OnFailEvent?.Invoke(this, onFaileArgs);
     }
 
+    protected virtual void OnScoreEventHandler(OnScoreArgs onScoreArgs)
+    {
+        _playerScore++;
+        var score = new OnScoreArgs { Score = _playerScore };
+        OnScoreEvent?.Invoke(this, score);
+    }
+
     public void Notify(OnShootArgs onShootArgs)
     {
 
@@ -81,6 +94,11 @@ public class GameManager : MonoBehaviour
     public void Notify(OnFaileArgs onFailArgs)
     {
         OnFailEventHandler(onFailArgs);
+    }
+
+    public void Notify(OnScoreArgs onScoreArgs)
+    {
+        OnScoreEventHandler(onScoreArgs);
     }
 
     private void Awake()
