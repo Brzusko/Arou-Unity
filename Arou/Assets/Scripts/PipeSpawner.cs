@@ -8,6 +8,7 @@ public class PipeSpawner : MonoBehaviour
     public event EventHandler<OnDespawnArgs> OnDespawn;
     public event EventHandler<OnSpawnArgs> OnSpawn;
     private LinkedList<Pipe> _despawnedPipes = new LinkedList<Pipe> { };
+    private GameManager _manager;
 
     [Header("Vars")]
     [SerializeField]
@@ -17,6 +18,7 @@ public class PipeSpawner : MonoBehaviour
     [SerializeField]
     private Transform _spawnTrasform;
     [SerializeField]
+    private int _lastPipesSpawnCount = 0;
     public int pipesSpawnCount = 0;
   
 
@@ -27,7 +29,16 @@ public class PipeSpawner : MonoBehaviour
         _despawnedPipes.AddLast(onDespawnArgs.Pipe);
     }
 
+    protected virtual void OnScoreHandler(object sender, OnScoreArgs onScoreArgs)
+    {
+        pipesSpawnCount = _manager.PipeSpawnCount;
 
+        if(pipesSpawnCount > _lastPipesSpawnCount)
+        {
+            _lastPipesSpawnCount = pipesSpawnCount;
+            Spawn();
+        }
+    }
     public void OnSpawnHandler(OnSpawnArgs onSpawnArgs)
     {
         OnSpawn?.Invoke(this, onSpawnArgs);
@@ -63,11 +74,19 @@ public class PipeSpawner : MonoBehaviour
         if (_despawnedPipes.Count == 0)
             return _spawnTrasform.position;
         else
-            return _despawnedPipes.Last.Value.transform.position + new Vector3(0, 10, 0);
+        {
+            return _despawnedPipes.Last.Value.transform.position + new Vector3(0, 0.7f, 0);
+        }
+            
     }
 
     private void Start()
     {
+        _manager = GameManager.Instance;
+        _manager.OnScoreEvent += OnScoreHandler;
+        pipesSpawnCount = _manager.PipeSpawnCount;
+        _lastPipesSpawnCount = pipesSpawnCount;
+
         for (var it = 0; it < pipesSpawnCount; it++)
             Spawn();
     }

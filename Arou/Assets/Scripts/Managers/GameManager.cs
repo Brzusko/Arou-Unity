@@ -40,6 +40,28 @@ public class GameManager : MonoBehaviour
         get { return _playerScore; }
     }
 
+    public int PipeSpawnCount
+    {
+        get
+        {
+            if(Score == 0)
+                return 3;
+
+            var toReturn = 3 + Mathf.FloorToInt(Score * 0.05f);
+            return toReturn;
+        }
+    }
+
+    public float MinPadWith
+    {
+        get => _minWidthBetweenPads;
+    }
+
+    public float MaxPadWith
+    {
+        get => _maxWidthBetweenPads;
+    }
+
     public PipeSpawner PipeSpawner { get => _pipeSpawner; }
     #endregion
 
@@ -62,7 +84,9 @@ public class GameManager : MonoBehaviour
     private float _maxForce = 0.0f;
     [SerializeField]
     private bool _isDebugModeOn = true;
-
+    [SerializeField]
+    private float _widthLimit = 0.0f;
+    
     [Header("Systems")]
     [SerializeField]
     private PipeSpawner _pipeSpawner;
@@ -87,10 +111,28 @@ public class GameManager : MonoBehaviour
     protected virtual void OnScoreEventHandler(OnScoreArgs onScoreArgs)
     {
         _playerScore++;
+        RecalculateSettings();
         var score = new OnScoreArgs { Score = _playerScore };
         OnScoreEvent?.Invoke(this, score);
     }
 
+    private void CaluclateMinWidth()
+    {
+        var newValue = (_playerScore * 0.03f - 3f) * (-1f);
+        newValue = Mathf.Clamp(newValue, _widthLimit, 5.0f);
+        _minWidthBetweenPads = newValue;
+    }
+
+    private void CalculateMaxWidth()
+    {
+        _maxWidthBetweenPads = _minWidthBetweenPads + 0.8f;
+    }
+
+    private void RecalculateSettings()
+    {
+        CaluclateMinWidth();
+        CalculateMaxWidth();
+    }
     public void Notify(OnShootArgs onShootArgs)
     {
 
@@ -114,6 +156,7 @@ public class GameManager : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(this);
+        RecalculateSettings();
     }
 
 }

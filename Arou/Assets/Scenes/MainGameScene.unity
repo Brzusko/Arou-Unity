@@ -557,6 +557,7 @@ MonoBehaviour:
   _prefabToSpawn: {fileID: 3020025106646029965, guid: cb72e0d382d95244fb7c1611697db847,
     type: 3}
   _spawnTrasform: {fileID: 71692945}
+  _lastPipesSpawnCount: 0
   pipesSpawnCount: 3
 --- !u!1001 &1421556260
 PrefabInstance:
@@ -630,6 +631,11 @@ PrefabInstance:
       propertyPath: _pipeSpawner
       value: 
       objectReference: {fileID: 1315304857}
+    - target: {fileID: 5362131718944985687, guid: b90ab6dc9b295084e9ebc31882d2bb66,
+        type: 3}
+      propertyPath: _widthLimit
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b90ab6dc9b295084e9ebc31882d2bb66, type: 3}
 --- !u!1 &1463966714
