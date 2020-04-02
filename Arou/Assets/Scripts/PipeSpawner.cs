@@ -75,7 +75,7 @@ public class PipeSpawner : MonoBehaviour
             return _spawnTrasform.position;
         else
         {
-            return _despawnedPipes.Last.Value.transform.position + new Vector3(0, 0.7f, 0);
+            return _despawnedPipes.Last.Value.transform.position + new Vector3(0, UnityEngine.Random.Range(_manager.MinPadHeight,_manager.MaxPadHeight), 0);
         }
             
     }

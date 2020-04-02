@@ -62,6 +62,16 @@ public class GameManager : MonoBehaviour
         get => _maxWidthBetweenPads;
     }
 
+    public float MinPadHeight
+    {
+        get => _minHeightBetweenPads;
+    }
+
+    public float MaxPadHeight
+    {
+        get => _maxHeightBetweenPads;
+    }
+
     public PipeSpawner PipeSpawner { get => _pipeSpawner; }
     #endregion
 
@@ -86,6 +96,8 @@ public class GameManager : MonoBehaviour
     private bool _isDebugModeOn = true;
     [SerializeField]
     private float _widthLimit = 0.0f;
+    [SerializeField]
+    private float _heightLimit = 0.0f;
     
     [Header("Systems")]
     [SerializeField]
@@ -128,10 +140,23 @@ public class GameManager : MonoBehaviour
         _maxWidthBetweenPads = _minWidthBetweenPads + 0.8f;
     }
 
+    private void CalculateMinHeight()
+    {
+        var newValue = (_playerScore * 0.05f - 3f) * (-1f);
+        newValue = Mathf.Clamp(newValue, _heightLimit, 5.0f);
+        _minHeightBetweenPads = newValue;
+    }
+
+    private void CalculateMaxHeight()
+    {
+        _maxHeightBetweenPads = _minHeightBetweenPads + 0.2f;
+    }
     private void RecalculateSettings()
     {
         CaluclateMinWidth();
         CalculateMaxWidth();
+        CalculateMinHeight();
+        CalculateMaxHeight();
     }
     public void Notify(OnShootArgs onShootArgs)
     {
