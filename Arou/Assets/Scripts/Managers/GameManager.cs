@@ -1,6 +1,7 @@
 ﻿using System;
 using EventArguments;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -180,8 +181,15 @@ public class GameManager : MonoBehaviour
             Destroy(this);
 
         _instance = this;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         RecalculateSettings();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            SceneManager.LoadScene("MainGameScene");
+        }
+    }
 }
