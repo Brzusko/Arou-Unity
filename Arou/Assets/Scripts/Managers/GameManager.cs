@@ -49,7 +49,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int _playerScore = 0;
     [SerializeField]
-    private float _maxDistanceBetweenPads = 0.0f;
+    private float _maxWidthBetweenPads = 0.0f;
+    [SerializeField]
+    private float _minWidthBetweenPads = 0.0f;
+    [SerializeField]
+    private float _maxHeightBetweenPads = 0.0f;
+    [SerializeField]
+    private float _minHeightBetweenPads = 0.0f;
     [SerializeField]
     private float _forceMultipler = 0.0f;
     [SerializeField]
@@ -108,11 +114,6 @@ public class GameManager : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(this);
-    }
-
-    private void Start()
-    {
-        
     }
 
 }

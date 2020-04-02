@@ -60,20 +60,4 @@ public class ForceHanlder : MonoBehaviour
             mouseState = MOUSE_STATE.NONE;
         }
     }
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 0.7f);
-
-
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, _forceVectors[0]);
-
-            Gizmos.color = Color.green;
-            var relativePosOfForce = transform.TransformDirection(_forceVectors[2]) - transform.position;
-            Gizmos.DrawLine(transform.position, transform.position + _forceVectors[2]);
-        
-    }
 }

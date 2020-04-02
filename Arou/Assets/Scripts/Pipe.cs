@@ -18,6 +18,7 @@ public class Pipe : MonoBehaviour
     private Transform _scoreAreaTransform;
     [SerializeField]
     private BoxCollider2D _scoreAreaCollider;
+    private bool CanBeScored = true;
 
     private Vector3 RelativePivotPos
     {
@@ -26,6 +27,8 @@ public class Pipe : MonoBehaviour
             return _rightPipePivot.transform.position - _leftPipePivot.transform.position;
         }
     }
+
+    public bool IsScorable { get => CanBeScored; }
 
     private void SetCenterOfArea()
     {
@@ -39,7 +42,13 @@ public class Pipe : MonoBehaviour
 
     public void SetNewLocation(Vector3 location)
     {
+        CanBeScored = true;
         transform.position = location;
+    }
+
+    public void Score()
+    {
+        CanBeScored = false;
     }
     void Start()
     {

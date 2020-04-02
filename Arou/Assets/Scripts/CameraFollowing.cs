@@ -28,10 +28,4 @@ public class CameraFollowing : MonoBehaviour
         }
 
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(_cameraPosOnSamePlane, _cameraPosOnSamePlane + _directionToPlayer);
-    }
 }
