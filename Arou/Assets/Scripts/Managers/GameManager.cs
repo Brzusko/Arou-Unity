@@ -1,6 +1,7 @@
 ﻿using System;
 using EventArguments;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -73,6 +74,11 @@ public class GameManager : MonoBehaviour
         get => _maxHeightBetweenPads;
     }
 
+    public float Gravity
+    {
+        get => _playerGravity;
+    }
+
     public PipeSpawner PipeSpawner { get => _pipeSpawner; }
     #endregion
 
@@ -99,10 +105,16 @@ public class GameManager : MonoBehaviour
     private float _widthLimit = 0.0f;
     [SerializeField]
     private float _heightLimit = 0.0f;
+    [SerializeField]
+    private float _playerGravity = 0.0f;
     
     [Header("Systems")]
     [SerializeField]
     private PipeSpawner _pipeSpawner;
+    [SerializeField]
+    private Text playerScore;
+    [SerializeField]
+    private GameObject panel;
     #endregion
 
     #region Events
@@ -118,6 +130,8 @@ public class GameManager : MonoBehaviour
 
     protected virtual void OnFailEventHandler(OnFaileArgs onFaileArgs)
     {
+        panel.SetActive(true);
+        playerScore.color = Color.black;
         OnFailEvent?.Invoke(this, onFaileArgs);
     }
 
@@ -126,6 +140,7 @@ public class GameManager : MonoBehaviour
         _playerScore++;
         RecalculateSettings();
         var score = new OnScoreArgs { Score = _playerScore };
+        StatsManager.Instance.playerScore = score.Score;
         OnScoreEvent?.Invoke(this, score);
     }
 
@@ -185,11 +200,9 @@ public class GameManager : MonoBehaviour
         RecalculateSettings();
     }
 
-    private void Update()
+    public void OnRestart()
     {
-        if(Input.GetKeyUp(KeyCode.Space))
-        {
-            SceneManager.LoadScene("MainGameScene");
-        }
+        SceneManager.LoadScene("MainGameScene");
     }
+
 }

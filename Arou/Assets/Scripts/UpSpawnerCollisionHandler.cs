@@ -9,6 +9,8 @@ public class UpSpawnerCollisionHandler : MonoBehaviour
         if (collision.tag == "ScoreArea")
         {
             var pipe = collision.transform.parent.GetComponent<Pipe>();
+            var index = pipe.name.IndexOf('_');
+            pipe.name = pipe.name.Remove(index);
             var eventArgs = new OnSpawnArgs { Pipe = pipe };
             GameManager.Instance.PipeSpawner.OnSpawnHandler(eventArgs);
         }

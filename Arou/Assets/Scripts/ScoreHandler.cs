@@ -18,6 +18,7 @@ public class ScoreHandler : MonoBehaviour
     private void OnScoreEventHandler(object sender, OnScoreArgs e)
     {
         _scoreText.text = $"{baseText}: {e.Score}".ToUpper();
+        Debug.Log("test");
     }
 
 }
