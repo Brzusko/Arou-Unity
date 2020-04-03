@@ -65,7 +65,7 @@ public class PipeSpawner : MonoBehaviour
     public void Spawn()
     {
         var spawnedPipe = Instantiate(_prefabToSpawn, CalculatePosition(), Quaternion.identity);
-        spawnedPipe.name = $"Pipe_{_despawnedPipes.Count + 1}";
+        spawnedPipe.name = $"Pipe{_despawnedPipes.Count + 1}_despawned";
         _despawnedPipes.AddLast(spawnedPipe.GetComponent<Pipe>());
     }
 
@@ -89,6 +89,11 @@ public class PipeSpawner : MonoBehaviour
 
         for (var it = 0; it < pipesSpawnCount; it++)
             Spawn();
+    }
+
+    private void Update()
+    {
+        Debug.Log(_despawnedPipes.Count);
     }
 
 }

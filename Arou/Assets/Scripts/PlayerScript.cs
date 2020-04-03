@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     {
         _rigidbody2D.velocity = new Vector2(0.0f,0.1f);
         _rigidbody2D.AddForce(onShootArgs.Force * _gameManager.ForceMultipler);
+        _rigidbody2D.gravityScale = _gameManager.Gravity;
     }
 
     protected virtual void OnFailHandler(object sender, OnFaileArgs onFailArgs)
@@ -24,6 +25,7 @@ public class PlayerScript : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _gameManager.OnShootEvent += OnShootHandler;
         _gameManager.OnFailEvent += OnFailHandler;
+        _rigidbody2D.gravityScale = 0.0f;
     }
 
     private void FixedUpdate()

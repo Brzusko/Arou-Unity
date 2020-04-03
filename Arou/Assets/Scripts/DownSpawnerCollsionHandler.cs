@@ -8,6 +8,7 @@ public class DownSpawnerCollsionHandler : MonoBehaviour
         if (collision.tag == "ScoreArea")
         {
             var pipe = collision.transform.parent.GetComponent<Pipe>();
+            pipe.name = $"{pipe.name}_despawned";
             var eventArgs = new OnDespawnArgs { Pipe = pipe};
             GameManager.Instance.PipeSpawner.OnDespawnHandler(eventArgs);
         }
