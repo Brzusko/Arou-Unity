@@ -6,15 +6,15 @@
 
 ---
 
-**Tytuł gry**: Arou
-**Grupa docelowa**: osoby, które posiadają +3 lataka
-**Gatunek**: One tap, zręcznościowa
-**Emocje, które towarzyszą podczas grania**: Frustracja, zdenerwowania, uczucie spełnienia, rywalizacja.
+**Tytuł gry**: Arou <br/>
+**Grupa docelowa**: osoby, które posiadają +3 lataka <br/>
+**Gatunek**: One tap, zręcznościowa <br/>
+**Emocje, które towarzyszą podczas grania**: Frustracja, zdenerwowania, uczucie spełnienia, rywalizacja. <br/>
 **Krótki opis gry**: Gra jest inspirowana takimi grami jak, flappy birds oraz angry birds. Gracz dostaje do dyspozycji strzałkę, którą musi wcelować się między dwa filary, żeby zdobyć punkt.
-Utrudnia mu to grawitacja, która cały czas sciąga naszą strzałke w dół. Żeby się utrzymać, osoba grająca musi cały czas "strzelać" naszą strzałką w górę. Czym więcej pkt. jest w posiadaniu, to gra robi się trudniejsza. Zwiększa się liczba filarów, odstępy między filarami są mniejsze i występują również częściej. Poziom trudności jest generowany losowo, na podstawie własnie zdobytego wyniku. Raz będzie trudniej, raz będzie łatwiej. Gracz przegrywa, jeśli strzałka uderzy w filar, albo wyjdzie poza obszar gry. 
-**Grafika**: Prosta 2D, wektorowa, dominujący kontrast bieli i czernego koloru.
-**Platformy**: Przeglądarka internetowa, Android, IOS
-**Stack Technologiczny**: Unity3D(Jako silnik do gry), firebase(przechowuje wynik od gracza), Adobe XD(Grafika w grze), itch.io(hosting, na którym jest wydana gra), Github(integracja i przechowywanie kodu).
+Utrudnia mu to grawitacja, która cały czas sciąga naszą strzałke w dół. Żeby się utrzymać, osoba grająca musi cały czas "strzelać" naszą strzałką w górę. Czym więcej pkt. jest w posiadaniu, to gra robi się trudniejsza. Zwiększa się liczba filarów, odstępy między filarami są mniejsze i występują również częściej. Poziom trudności jest generowany losowo, na podstawie własnie zdobytego wyniku. Raz będzie trudniej, raz będzie łatwiej. Gracz przegrywa, jeśli strzałka uderzy w filar, albo wyjdzie poza obszar gry. <br/>
+**Grafika**: Prosta 2D, wektorowa, dominujący kontrast bieli i czernego koloru.<br/>
+**Platformy**: Przeglądarka internetowa, Android, IOS<br/>
+**Stack Technologiczny**: Unity3D(Jako silnik do gry), firebase(przechowuje wynik od gracza), Adobe XD(Grafika w grze), itch.io(hosting, na którym jest wydana gra), Github(integracja i przechowywanie kodu).<br/>
 
 ### Ekran startowy gry:
 <p align="center">
